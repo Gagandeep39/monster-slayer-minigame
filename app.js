@@ -1,3 +1,12 @@
+// ################################
+// ######## Vinalli JS ############
+// ################################
+function getRamdomValue(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+// ################################
+// ########Vue Application ########
+// ################################
 const app = Vue.createApp({
   data() {
     return {
@@ -8,13 +17,13 @@ const app = Vue.createApp({
   methods: {
     attackMonster() {
       // Calculate damage between 5 and 12
-      const damage = Math.floor(Math.random() * (12 - 5)) + 5;
+      const damage = getRamdomValue(5, 12);
       // Update the health of monster
       this.monsterHealth -= damage;
     },
     attackPlayer() {
       // Calculate damage between 8 and 12
-      const damage = Math.floor(Math.random() * (12 - 8)) + 8;
+      const damage = getRamdomValue(8, 12);
       // Update the health of player
       this.playerHealth -= damage;
     },
