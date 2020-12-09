@@ -14,6 +14,7 @@ const app = Vue.createApp({
       monsterHealth: 100,
       currentRound: 0,
       winner: null,
+      logMessages: [],
     };
   },
   methods: {
@@ -25,6 +26,8 @@ const app = Vue.createApp({
       const damage = getRamdomValue(5, 12);
       // Update the health of monster
       this.monsterHealth -= damage;
+      // Logs
+      this.addLogMessage('player', 'attack', damage);
       // Attack player automatically
       this.attackPlayer();
     },
@@ -33,6 +36,8 @@ const app = Vue.createApp({
       const damage = getRamdomValue(8, 12);
       // Update the health of player
       this.playerHealth -= damage;
+      // Logs
+      this.addLogMessage('monster', 'attack', damage);
     },
     specialAttackMonster() {
       this.currentRound++;
@@ -40,6 +45,8 @@ const app = Vue.createApp({
       const damage = getRamdomValue(10, 25);
       // Update the health of monster
       this.monsterHealth -= damage;
+      // Logs
+      this.addLogMessage('player', 'specialattack', damage);
       // Attack player automatically
       this.attackPlayer();
     },
@@ -47,6 +54,8 @@ const app = Vue.createApp({
       const healValue = getRamdomValue(8, 20);
       if (this.playerHealth + healValue > 100) this.playerHealth = 100;
       else this.playerHealth += healValue;
+      // Logs
+      this.addLogMessage('player', 'heal', healValue);
       this.attackPlayer();
     },
     startNewGame() {
@@ -56,7 +65,15 @@ const app = Vue.createApp({
       this.winner = null;
     },
     surrender() {
+      // Monster wins
       this.winner = 'monster';
+    },
+    addLogMessage(who, what, value) {
+      this.logMessages.unshift({
+        actionBy: who,
+        actionType: what,
+        actionValue: value,
+      });
     },
   },
   computed: {
