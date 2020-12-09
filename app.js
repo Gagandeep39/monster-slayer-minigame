@@ -49,6 +49,12 @@ const app = Vue.createApp({
       else this.playerHealth += healValue;
       this.attackPlayer();
     },
+    startNewGame() {
+      this.playerHealth = 100;
+      this.monsterHealth = 100;
+      this.currentRound = 0;
+      this.winner = null;
+    },
   },
   computed: {
     monsterBarStyles() {
