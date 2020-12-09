@@ -20,6 +20,8 @@ const app = Vue.createApp({
       const damage = getRamdomValue(5, 12);
       // Update the health of monster
       this.monsterHealth -= damage;
+      // Attack player automatically
+      this.attackPlayer();
     },
     attackPlayer() {
       // Calculate damage between 8 and 12
