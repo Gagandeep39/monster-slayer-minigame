@@ -12,10 +12,14 @@ const app = Vue.createApp({
     return {
       playerHealth: 100,
       monsterHealth: 100,
+      currentRound: 0,
     };
   },
   methods: {
     attackMonster() {
+      // Increment current round
+      // Sued for special attack
+      this.currentRound++;
       // Calculate damage between 5 and 12
       const damage = getRamdomValue(5, 12);
       // Update the health of monster
@@ -29,6 +33,15 @@ const app = Vue.createApp({
       // Update the health of player
       this.playerHealth -= damage;
     },
+    specialAttackMonster() {
+      this.currentRound++;
+      // Calculate damage between 5 and 12
+      const damage = getRamdomValue(10, 25);
+      // Update the health of monster
+      this.monsterHealth -= damage;
+      // Attack player automatically
+      this.attackPlayer();
+    },
   },
   computed: {
     monsterBarStyles() {
@@ -36,6 +49,9 @@ const app = Vue.createApp({
     },
     playerBarStyles() {
       return { width: this.playerHealth + '%' };
+    },
+    mayUseSpecialAttack() {
+      return this.currentRound % 3 !== 0;
     },
   },
 });
