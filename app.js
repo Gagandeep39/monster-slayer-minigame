@@ -42,6 +42,12 @@ const app = Vue.createApp({
       // Attack player automatically
       this.attackPlayer();
     },
+    healPlayer() {
+      const healValue = getRamdomValue(8, 20);
+      if (this.playerHealth + healValue > 100) this.playerHealth = 100;
+      else this.playerHealth += healValue;
+      this.attackPlayer();
+    },
   },
   computed: {
     monsterBarStyles() {
